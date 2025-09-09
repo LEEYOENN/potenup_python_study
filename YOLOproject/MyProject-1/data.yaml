@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 2
+names: ['cats', 'dogs']
+
+roboflow:
+  workspace: yeonlee-8jzjj
+  project: myproject-btu4g
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/yeonlee-8jzjj/myproject-btu4g/dataset/1

@@ -1,0 +1,175 @@
+{
+    "input_path": "./images/webtoon1.jpeg",
+    "page_index": null,
+    "model_settings": {
+        "use_doc_preprocessor": true,
+        "use_textline_orientation": false
+    },
+    "doc_preprocessor_res": {
+        "input_path": null,
+        "page_index": null,
+        "model_settings": {
+            "use_doc_orientation_classify": false,
+            "use_doc_unwarping": false
+        },
+        "angle": -1
+    },
+    "dt_polys": [
+        [
+            [
+                50,
+                35
+            ],
+            [
+                444,
+                35
+            ],
+            [
+                444,
+                84
+            ],
+            [
+                50,
+                84
+            ]
+        ],
+        [
+            [
+                144,
+                76
+            ],
+            [
+                350,
+                79
+            ],
+            [
+                350,
+                124
+            ],
+            [
+                144,
+                122
+            ]
+        ],
+        [
+            [
+                260,
+                640
+            ],
+            [
+                660,
+                642
+            ],
+            [
+                659,
+                691
+            ],
+            [
+                260,
+                689
+            ]
+        ]
+    ],
+    "text_det_params": {
+        "limit_side_len": 64,
+        "limit_type": "min",
+        "thresh": 0.3,
+        "max_side_limit": 4000,
+        "box_thresh": 0.6,
+        "unclip_ratio": 1.5
+    },
+    "text_type": "general",
+    "textline_orientation_angles": [
+        -1,
+        -1,
+        -1
+    ],
+    "text_rec_score_thresh": 0.0,
+    "return_word_box": false,
+    "rec_texts": [
+        "어제 이거 가지고 노는 것도",
+        "너무 귀여웠지",
+        "그러게~언제 이렇게 컸지"
+    ],
+    "rec_scores": [
+        0.9676269292831421,
+        0.9845134615898132,
+        0.9182919859886169
+    ],
+    "rec_polys": [
+        [
+            [
+                50,
+                35
+            ],
+            [
+                444,
+                35
+            ],
+            [
+                444,
+                84
+            ],
+            [
+                50,
+                84
+            ]
+        ],
+        [
+            [
+                144,
+                76
+            ],
+            [
+                350,
+                79
+            ],
+            [
+                350,
+                124
+            ],
+            [
+                144,
+                122
+            ]
+        ],
+        [
+            [
+                260,
+                640
+            ],
+            [
+                660,
+                642
+            ],
+            [
+                659,
+                691
+            ],
+            [
+                260,
+                689
+            ]
+        ]
+    ],
+    "rec_boxes": [
+        [
+            50,
+            35,
+            444,
+            84
+        ],
+        [
+            144,
+            76,
+            350,
+            124
+        ],
+        [
+            260,
+            640,
+            660,
+            691
+        ]
+    ]
+}
