@@ -1,0 +1,17 @@
+# docker-compose.yml
+version: '3.8'
+services:
+  db:
+    image: postgres:15 # PostgreSQL 15 이미지 사용
+    container_name: my_chat_db # 컨테이너 이름
+    environment: # 환경 변수 설정
+      POSTGRES_USER: root # 사용자 이름
+      POSTGRES_PASSWORD: Skek0033# # 비밀번호
+      POSTGRES_DB: chat_db # 데이터베이스 이름
+    ports:
+      - "5432:5432" # 내 컴퓨터의 5432 포트를 컨테이너의 5432 포트에 매핑
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # 데이터 영속성을 위한 볼륨 마운트
+    
+volumes:
+  postgres_data:

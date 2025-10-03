@@ -6,6 +6,8 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_community.chat_message_histories import SQLChatMessageHistory # DB에 저장되어있는 메시지 히스토리
 from langchain_core.runnables.utils import ConfigurableFieldSpec
+from langchain_community.chat_message_histories import PostgresChatMessageHistory
+
 # LangSmith 추적 설정 부분
 from dotenv import load_dotenv
 import os
@@ -27,7 +29,7 @@ model = ChatOpenAI(
 )
 # --- DB 세팅 --- #
 DB_URL = "sqlite:///chat_history_test.db"
-
+# DB_URL = "postgresql+asyncpg://root:Skek0033#@localhost:5432/chat_db"
 
 # --- Help 함수 --- #
 def get_chat_history(session_id: str, conversation_id: str) -> dict:
@@ -36,6 +38,14 @@ def get_chat_history(session_id: str, conversation_id: str) -> dict:
         session_id = conversation_id,
         connection = DB_URL
     )
+
+#--- 데이터베이스 연결 url을 비동기 드라이버(asyncpg)용으로 변경
+# def get_chat_history(session_id: str, conversation_id: str) -> PostgresChatMessageHistory:
+#     return PostgresChatMessageHistory(
+#         table_name=session_id,
+#         session_id=conversation_id,
+#         connection_string=DB_URL, # 이제 이 인자를 정상적으로 사용할 수 있어!
+#     )
 
 async def friendly_chat_model(question: str, session_id: str, conversation_id: str):
     prompt = ChatPromptTemplate.from_messages([
@@ -71,14 +81,17 @@ async def friendly_chat_model(question: str, session_id: str, conversation_id: s
                     ],
     )
     config = {"configurable": {"session_id": session_id, "conversation_id": conversation_id}}
-    response_stream = with_history.astream({"question": question}, config=config)
+    response = with_history.invoke({"question": question}, config=config)
+
+    return response
 
     # 2. 'async for'를 사용해 비동기 스트림을 순회합니다.
     #    여기서 스트림을 소비(print, full_response +=)하는 대신,
     #    그대로 바깥으로 전달(yield)합니다.
-    async for chunk in response_stream:
+    # async for chunk in response:
         # 3. LangChain 스트림의 chunk는 일반적으로 .content 속성에 실제 텍스트를 담고 있습니다.
         #    따라서 chunk 객체 전체가 아닌, chunk.content를 yield 해줍니다.
-        yield chunk.content
-# if __name__ == '__main__':
+        # yield chunk.content
+
+#  if __name__ == '__main__':
 #     print(friendly_chat_model("안녕", "user1", "conv1"))

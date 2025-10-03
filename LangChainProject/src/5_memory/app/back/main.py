@@ -30,16 +30,18 @@ async def websocket_chat(websocket: WebSocket):
             conversation_id = json_data["conversation_id"]
 
             # STEP 2-2: 받은 질문으로 비즈니스 로직(모델 호출 등)을 수행합니다.
-            response_generator =  friendly_chat_model(
+            response = await friendly_chat_model(
                 question=question, session_id=session_id, conversation_id=conversation_id
                 )
             
-             # STEP 2-3: 결과를 스트리밍하여 클라이언트로 전송합니다.
-            async for token in response_generator:
-                await websocket.send_json({"token": token})
-            # (선택사항) 스트리밍이 끝났음을 알리는 메시지를 보낼 수도 있습니다.
+            #  # STEP 2-3: 결과를 스트리밍하여 클라이언트로 전송합니다.
+            await websocket.send_json({"token": response})
             await websocket.send_json({"token": "[DONE]"})
-    
+            # async for token in response_generator:
+            #     await websocket.send_json({"token": token})
+            # # (선택사항) 스트리밍이 끝났음을 알리는 메시지를 보낼 수도 있습니다.
+            # await websocket.send_json({"token": "[DONE]"})
+
     except WebSocketDisconnect:
         # STEP 3-1: 클라이언트가 연결을 끊었을 때 처리합니다.
         print("클라이언트에 의해 WebSocket 연결이 종료되었습니다.")
