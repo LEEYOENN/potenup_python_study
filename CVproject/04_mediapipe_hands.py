@@ -61,7 +61,7 @@ while True:
     #contrast_frame = 255 - flipped_frame
 
     rgb_frame = cv2.cvtColor(flipped_frame, cv2.COLOR_BGR2RGB)
-        # 손 그리기 설정
+    # 손 그리기 설정
     frame.flags.writeable = False
     # 화면 띄우기
     cv2.imshow("webcam", flipped_frame)
