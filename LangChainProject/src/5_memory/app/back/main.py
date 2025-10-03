@@ -30,12 +30,12 @@ async def websocket_chat(websocket: WebSocket):
             conversation_id = json_data["conversation_id"]
 
             # STEP 2-2: 받은 질문으로 비즈니스 로직(모델 호출 등)을 수행합니다.
-            response = await friendly_chat_model(
+            response_generator =  friendly_chat_model(
                 question=question, session_id=session_id, conversation_id=conversation_id
                 )
             
              # STEP 2-3: 결과를 스트리밍하여 클라이언트로 전송합니다.
-            for token in response:
+            async for token in response_generator:
                 await websocket.send_json({"token": token})
             # (선택사항) 스트리밍이 끝났음을 알리는 메시지를 보낼 수도 있습니다.
             await websocket.send_json({"token": "[DONE]"})
