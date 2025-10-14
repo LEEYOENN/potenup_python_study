@@ -5,3 +5,5 @@ LLM_project/gguf_test/*.gguf
 
 # 모든 하위 폴더에서 .gguf 파일 무시
 *.gguf
+
+*.venv
