@@ -1,1 +1,4 @@
 .env
+./src/7_vectorstore/chroma_store
+./src/7_vectorstore/samsung_2025_db
+./src/7_vectorstore/samsung_faiss.db
